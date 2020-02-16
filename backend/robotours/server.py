@@ -34,7 +34,7 @@ def pick_poi(lat, long, filter='Any'):
     logging.debug("Result")
     logging.debug(response.result)
     '''
-    json_response = jsonify(response.data)
+    #json_response = jsonify(response.data)
 
     # Parse the result into a list
     list_response = response.data
@@ -45,7 +45,7 @@ def pick_poi(lat, long, filter='Any'):
     restaurants = []
 
     for location in list_response:
-        print(location['category'])
+        #print(location['category'])
         # print(type(location['category']))
         if location['category'] == "SIGHTS":
             # print("Found an attraction!")
@@ -54,15 +54,22 @@ def pick_poi(lat, long, filter='Any'):
             restaurants.append(location)
 
     # Based on the filter, return
+    attractions = random.choice(attractions)
+    restaurants = random.choice(restaurants)
+
     if filter == 'tour':
-        return jsonify(attractions)
+        if any(attractions):
+            return jsonify(attractions)
+        else:
+            return "Error: No locations found"
     elif filter == 'food':
-        return jsonify(restaurants)
+        if any(restaurants):
+            return jsonify(restaurants)
+        else:
+            return "Error: No locations found"
     else:
-        return json_response
-    list = response.result
-    location = random.choice(list)
-    return jsonify(location)
+        location = random.choice(list_response)
+        return jsonify(location)
 
 if __name__ == '__main__':
     app.run()
