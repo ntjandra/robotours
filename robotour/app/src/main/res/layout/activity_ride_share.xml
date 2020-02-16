@@ -51,7 +51,7 @@
         android:text="@string/RideShare_btn_confirm"
         tools:layout_editor_absoluteX="145dp"
         tools:layout_editor_absoluteY="458dp"
-        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="100dp"
         android:layout_centerVertical="true"/>
 
     <Button
@@ -61,7 +61,7 @@
         android:text="@string/RideShare_btn_deny"
         tools:layout_editor_absoluteX="145dp"
         tools:layout_editor_absoluteY="458dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="200dp"
         android:layout_alignLeft="@id/RideShare_btn_confirm"
         android:layout_centerVertical="true"/>
 
@@ -70,6 +70,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_alignTop="@id/RideShare_btn_confirm"
+        android:layout_marginTop="200dp"
         android:text="@string/RideShare_btn_text" />
 </RelativeLayout>

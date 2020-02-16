@@ -9,9 +9,12 @@ import android.content.Context;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +29,12 @@ import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.mapviewlite.MapScene;
 import com.here.sdk.mapviewlite.MapStyle;
 import com.here.sdk.mapviewlite.MapViewLite;
+
+import java.io.BufferedInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity{
     protected LocationManager locationManager;
@@ -75,15 +84,11 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        handleAndroidPermissions();
-
         searchView = findViewById(R.id.MainActivity_srcview_location);
         btn = findViewById(R.id.MainActivity_btn_useCurrentLocation);
 
         mapView = findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
-
-        loadMapScene();
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -135,6 +140,14 @@ public class MainActivity extends AppCompatActivity{
                 return false;
             }
         });
+
+        while(!getLocation())
+        {
+            handleAndroidPermissions();
+        }
+
+        loadMapScene();
+        new GetLocation().execute();
     }
     private void loadMapScene() {
         // Load a scene from the SDK to render the map with a map style.
@@ -218,6 +231,32 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
+    public Location search()
+    {
+        return null;
+    }
+    public class GetLocation extends AsyncTask<Void, Void, Location> {
+        private String fileNameString = "";
+
+        @Override
+        protected Location doInBackground(Void... nothing) {
+            if(checkLocationPermission())
+            {
+                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            }
+            return location;
+        }
+
+        @Override
+        protected void onPostExecute(Location result) {
+            mapView.getCamera().setTarget(new GeoCoordinates(result.getLongitude(),result.getLatitude()));
+        }
+    }
+    public void resetCamera()
+    {
+        mapView.getCamera().setZoomLevel(15);
+        mapView.getCamera().setTilt(0);
+    }
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
