@@ -17,7 +17,9 @@ import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.mapviewlite.MapScene;
 import com.here.sdk.mapviewlite.MapStyle;
 import com.here.sdk.mapviewlite.MapViewLite;
-
+import com.android.volley.toolbox.Volley;
+import com.google.gson.*;
+//import com.google.code.gson;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,9 +35,8 @@ public class MainActivity extends AppCompatActivity {
         mapView = findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
        // handleAndroidPermissions();
-
+        createRequestPOI(52,13, "food");
         loadMapScene(52.530932, 13.384915);
-
     }
 
     private void handleAndroidPermissions() {
@@ -62,13 +63,18 @@ public class MainActivity extends AppCompatActivity {
     private void createRequestPOI(int lat, int lng, String filter) {
 
         String API;
-
         {
-            API = "http://localhost:5000/location/interest/"
+            API = "http://64.124.137.130:5000/location/interest/"
                     + lat + "/" + lng + "/" + filter;
         }
 
-        System.out.print(API);
+//        System.out.println(lat);
+//        System.out.println(lng);
+//        System.out.println(filter);
+        Log.e("Hello",filter);
+        Log.e("Hello",API);
+
+
         RequestQueue requestQueue= Volley.newRequestQueue(this);
 
         JsonObjectRequest objectRequest = new JsonObjectRequest(
@@ -78,24 +84,25 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>(){
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.e("Good","Good");
                         Log.e("Rest API Response", response.toString());
                     }
                 },
                 new Response.ErrorListener(){
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        Log.e("Bad","Bad");
                         Log.e("Rest API Response", error.toString());
                     }
                 }
         );
 
         requestQueue.add(objectRequest);
+
     }
 
     private void loadMapScene(double lat,double lng) {
         // Load a scene from the SDK to render the map with a map style.
-//        double lat1 = 52.530932;
-//        double lng1 = 13.384915;
 
         mapView.getMapScene().loadScene(MapStyle.NORMAL_DAY, new MapScene.LoadSceneCallback() {
             @Override
