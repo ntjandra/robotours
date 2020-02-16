@@ -22,16 +22,18 @@ public class MainActivity extends AppCompatActivity {
         // Get a MapViewLite instance from the layout.
         mapView = findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
-        loadMapScene();
+        loadMapScene(13.384915, 52.530932);
     }
 
-    private void loadMapScene() {
+    private void loadMapScene(int lat, int lng) {
         // Load a scene from the SDK to render the map with a map style.
         mapView.getMapScene().loadScene(MapStyle.NORMAL_DAY, new MapScene.LoadSceneCallback() {
             @Override
             public void onLoadScene(@Nullable MapScene.ErrorCode errorCode) {
+                // int lng = 13.384915;
+                // int lat = 52.530932;
                 if (errorCode == null) {
-                    mapView.getCamera().setTarget(new GeoCoordinates(52.530932, 13.384915));
+                    mapView.getCamera().setTarget(new GeoCoordinates(lat, lng));
                     mapView.getCamera().setZoomLevel(14);
                 } else {
                     Log.d(TAG, "onLoadScene failed: " + errorCode.toString());
