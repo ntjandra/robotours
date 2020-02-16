@@ -25,6 +25,32 @@ public class MainActivity extends AppCompatActivity {
         loadMapScene(13.384915, 52.530932);
     }
 
+    private void createRequestPOI(int lat, int lng, String filter)
+            String API = "http://localhost:5000/location/interest/"
+                    + lat + "/" + lng + "/" + filter;
+            RequestQueue requestQueue=Volley.newRequestQueue(this);
+
+            JsonObjectRequest objectRequest = new JsonObjectRequest(
+                    Request.Method.GET,
+                    API,
+                    null,
+                    new Response.Listener<JSONObject> {
+                        @Overide
+                        public void onResponse(JSONObject response) {
+                            Log.e("Rest API Response", response.toString());
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Overide
+                        public void onErrorResponse(VolleyError error){
+                            Log.e("Rest API Response", error.toString());
+                        }
+                    }
+            );
+
+            requestQueue.add(objectRequest);
+        }
+    }
     private void loadMapScene(int lat, int lng) {
         // Load a scene from the SDK to render the map with a map style.
         mapView.getMapScene().loadScene(MapStyle.NORMAL_DAY, new MapScene.LoadSceneCallback() {
