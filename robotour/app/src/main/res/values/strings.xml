@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">robotour</string>
+    <string name="title_activity_destination">Destination</string>
+    <string name="title_activity_ride_share">RideShare</string>
+    <string name="MainActivity_curLoc">Use Current Location</string>
+    <string name="MainActivity_hint_search">Enter your location</string>
+    <string name="Destination_btn_randomize">Randomize</string>
+    <string name="Destination_txt_information">Temporary Changeable data</string>
+    <string name="Destination_btn_bookRide">Book me the ride</string>
+    <string name="RideShare_btn_text">Does everything correct?</string>
+    <string name="RideShare_btn_confirm">yes</string>
+    <string name="RideShare_btn_deny">no</string>
+</resources>
