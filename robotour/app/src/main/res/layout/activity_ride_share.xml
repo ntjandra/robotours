@@ -6,7 +6,44 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".RideShare">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/overflowMenuColor"
+            app:contentInsetStart="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/RideShare_txt_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="60dp"
+                    android:textSize="30dp"
+                    android:textColor="@color/black"
+                    android:text="@string/app_name"
+                    android:layout_alignParentStart="true" />
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
     <Button
         android:id="@+id/RideShare_btn_confirm"
         android:layout_width="wrap_content"
@@ -32,5 +69,7 @@
         android:id="@+id/RideShare_text_textFill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/RideShare_btn_confirm"
         android:text="@string/RideShare_btn_text" />
 </RelativeLayout>

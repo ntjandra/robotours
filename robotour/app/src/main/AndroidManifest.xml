@@ -18,13 +18,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".DestinationInformation"></activity>
-        <activity android:name=".RideShare" />
+        <activity android:name=".RideShare"
+            android:parentActivityName=".Destination"/>
         <activity
             android:name=".Destination"
             android:label="@string/title_activity_destination"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
