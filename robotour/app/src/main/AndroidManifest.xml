@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.robotour">
 
     <application
@@ -9,6 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<!--        <uses-permission android:name="android.permission.INTERNET"-->
+<!--            tools:ignore="WrongManifestParent" />-->
+<!--        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"-->
+<!--            tools:ignore="WrongManifestParent" />-->
         <meta-data android:name="com.here.sdk.access_key_id" android:value="sowSPLgLyPUV2N9TIMo6QA" />
         <meta-data android:name="com.here.sdk.access_key_secret" android:value="PSgclTdxBtRW9BpaUKtiT1oNzBBNwgbVnzXGDbK11s8y5jeHy5mMCzP-0_M-_es0AhyHBTvnQRrvdXUwJUNcMg" />
         <activity android:name=".MainActivity">

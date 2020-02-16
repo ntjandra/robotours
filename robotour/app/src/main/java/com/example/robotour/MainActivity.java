@@ -7,9 +7,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -64,16 +66,12 @@ public class MainActivity extends AppCompatActivity {
 
         String API;
         {
-            API = "http://64.124.137.130:5000/location/interest/"
+            API = "http://34fb4a48.ngrok.io/location/interest/"
                     + lat + "/" + lng + "/" + filter;
         }
 
-//        System.out.println(lat);
-//        System.out.println(lng);
-//        System.out.println(filter);
         Log.e("Hello",filter);
         Log.e("Hello",API);
-
 
         RequestQueue requestQueue= Volley.newRequestQueue(this);
 
@@ -97,8 +95,8 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        requestQueue.add(objectRequest);
 
+        requestQueue.add(objectRequest);
     }
 
     private void loadMapScene(double lat,double lng) {
