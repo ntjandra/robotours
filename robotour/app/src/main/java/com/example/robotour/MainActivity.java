@@ -1,5 +1,7 @@
 package com.example.robotour;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -11,6 +13,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
@@ -19,11 +22,18 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.here.sdk.core.GeoCoordinates;
+import com.here.sdk.mapviewlite.MapScene;
+import com.here.sdk.mapviewlite.MapStyle;
+import com.here.sdk.mapviewlite.MapViewLite;
+
 public class MainActivity extends AppCompatActivity{
     protected LocationManager locationManager;
     private Location location;
 
     private String searcher;
+
+    private MapViewLite mapView;
 
     public LocationListener locationListener = new LocationListener() {
         @Override
@@ -51,6 +61,8 @@ public class MainActivity extends AppCompatActivity{
     // flag for GPS status
     public boolean isGPSEnabled = false;
 
+    private PermissionsRequestor permissionsRequestor;
+
     // flag for network status
     boolean isNetworkEnabled = false;
 
@@ -63,8 +75,15 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        handleAndroidPermissions();
+
         searchView = findViewById(R.id.MainActivity_srcview_location);
         btn = findViewById(R.id.MainActivity_btn_useCurrentLocation);
+
+        mapView = findViewById(R.id.map_view);
+        mapView.onCreate(savedInstanceState);
+
+        loadMapScene();
 
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -114,6 +133,55 @@ public class MainActivity extends AppCompatActivity{
                     searcher = newText;
                 }
                 return false;
+            }
+        });
+    }
+    private void loadMapScene() {
+        // Load a scene from the SDK to render the map with a map style.
+        mapView.getMapScene().loadScene(MapStyle.NORMAL_DAY, new MapScene.LoadSceneCallback() {
+            @Override
+            public void onLoadScene(@Nullable MapScene.ErrorCode errorCode) {
+                if (errorCode == null) {
+                    mapView.getCamera().setTarget(new GeoCoordinates(52.530932, 13.384915));
+                    mapView.getCamera().setZoomLevel(14);
+                } else {
+                    //Log.d(TAG, "onLoadScene failed: " + errorCode.toString());
+                }
+            }
+        });
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        permissionsRequestor.onRequestPermissionsResult(requestCode, grantResults);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+    private void handleAndroidPermissions() {
+        permissionsRequestor = new PermissionsRequestor(this);
+        permissionsRequestor.request(new PermissionsRequestor.ResultListener(){
+
+            @Override
+            public void permissionsGranted() {
+                loadMapScene();
+            }
+
+            @Override
+            public void permissionsDenied() {
             }
         });
     }

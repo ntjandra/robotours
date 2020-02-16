@@ -52,4 +52,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400dp"
         android:text="@string/MainActivity_curLoc" />
+
+    <com.here.sdk.mapviewlite.MapViewLite
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.here.sdk.mapviewlite.MapViewLite>
+
 </RelativeLayout>

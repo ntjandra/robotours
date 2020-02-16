@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: __local_aars__:C.\Users\KIA\Desktop\robotours\robotour\app\libs\heresdk-lite-android-4.1.5.0.951.aar:unspecified@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c39449025aaa840ec35b691e4c177c29/heresdk-lite-android-4.1.5.0.951/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c39449025aaa840ec35b691e4c177c29/heresdk-lite-android-4.1.5.0.951/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
