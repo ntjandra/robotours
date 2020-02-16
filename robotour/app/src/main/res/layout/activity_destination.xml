@@ -21,12 +21,12 @@
         android:layout_centerVertical="true"/>
 
     <Button
-        android:id="@+id/Destination_btn_bookRide"
+        android:id="@+id/Destination_btn_bookride"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/Destination_btn_destination"
-        android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"
-        android:text="@+id/Destination_btn_bookRide"/>
+        android:layout_marginTop="50dp"
+        android:text="@string/Destination_btn_bookRide" />
 
 </RelativeLayout>
