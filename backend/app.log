@@ -1,0 +1,2 @@
+werkzeug - INFO - 127.0.0.1 - - [15/Feb/2020 17:42:58] "[37mGET /location/interest/0/0 HTTP/1.1[0m" 200 -
+werkzeug - INFO -  * Detected change in 'C:\\Users\\Nathan\\Desktop\\DevWeek2020\\robotours\\backend\\robotours\\server.py', reloading
