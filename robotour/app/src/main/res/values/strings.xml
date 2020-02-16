@@ -10,4 +10,9 @@
     <string name="RideShare_btn_text">Does everything correct?</string>
     <string name="RideShare_btn_confirm">yes</string>
     <string name="RideShare_btn_deny">no</string>
+
+    <string-array name="filters">
+        <item>Food</item>
+        <item>Sightseeing</item>
+    </string-array>
 </resources>

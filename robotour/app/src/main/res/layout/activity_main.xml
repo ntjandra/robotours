@@ -7,14 +7,43 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <SearchView
-        android:id="@+id/MainActivity_srcview_location"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolBarContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:queryHint="@string/MainActivity_hint_search">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white">
 
-    </SearchView>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="@style/overflowMenuColor"
+            app:contentInsetStart="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+
+                <SearchView
+                    android:id="@+id/MainActivity_srcview_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentStart="true"
+                    android:iconifiedByDefault="false"
+                    android:imeOptions="actionSearch"
+                    android:queryHint="@string/MainActivity_hint_search"
+                    android:theme="@style/searchViewTheme" />
+
+            </RelativeLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <Button
         android:id="@+id/MainActivity_btn_useCurrentLocation"

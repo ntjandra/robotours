@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity{
     protected LocationManager locationManager;
     private Location location;
 
+    private String searcher;
+
     public LocationListener locationListener = new LocationListener() {
         @Override
         public void onLocationChanged (Location location){
@@ -107,9 +109,8 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(newText.equals(""))
-                {
-
+                if (newText != "") {
+                    searcher = newText;
                 }
                 return false;
             }
